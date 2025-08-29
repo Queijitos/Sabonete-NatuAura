@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NatuAura — Sabonetes Artesanais</title>
+  <meta name="description" content="Sabonetes artesanais feitos com óleos vegetais, fragrâncias suaves e zero crueldade animal." />
+  <style>
+    :root{
+      --bg:#faf8f6; --ink:#0f172a; --muted:#475569; --brand:#2dd4bf; --brand-2:#0ea5e9; --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial; color:var(--ink); background:radial-gradient(1200px 600px at 20% -10%, #c7f9f1 0, transparent 40%), radial-gradient(900px 600px at 100% 0, #cfe9ff 0, transparent 50%), var(--bg)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1120px;margin:0 auto;padding:24px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:16px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;font-weight:700;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(14,165,233,.25);transition:.2s}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(14,165,233,.32)}
+    .btn.ghost{background:#fff;color:var(--ink);border:1px solid rgba(15,23,42,.08);box-shadow:0 6px 16px rgba(15,23,42,.06)}
+    header{position:sticky;top:0;backdrop-filter:saturate(140%) blur(8px);background:rgba(250,248,246,.7);border-bottom:1px solid rgba(15,23,42,.06);z-index:10}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
+    .brand .logo{width:38px;height:38px;border-radius:12px;background:conic-gradient(from 180deg at 50% 50%, var(--brand) 0 50%, var(--brand-2) 50%);display:grid;place-items:center;color:#fff;font-size:20px;box-shadow:0 6px 16px rgba(13,148,136,.35)}
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap}
+    .nav-links a{opacity:.8}
+    .nav-links a:hover{opacity:1}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;padding:56px 0}
+    .hero h1{font-size:clamp(28px,3.8vw,54px);line-height:1.05;margin:0 0 14px}
+    .hero p{font-size:clamp(16px,1.4vw,19px);color:var(--muted);margin:0 0 24px}
+    .hero-card{background:var(--card);border:1px solid rgba(15,23,42,.06);border-radius:28px;padding:22px;box-shadow:0 20px 60px rgba(2,6,23,.06)}
+    .hero-soap{aspect-ratio:1/1;border-radius:22px;background:linear-gradient(145deg,#fff, #f1fff9);display:grid;place-items:center;position:relative;overflow:hidden}
+    .bubble{position:absolute;border-radius:999px;filter:blur(0.2px);opacity:.85;box-shadow:inset -8px -10px 20px rgba(255,255,255,.65), inset 10px 14px 28px rgba(0,0,0,.07)}
+    .bubble:nth-child(1){width:210px;height:210px;left:-40px;top:-20px;background:radial-gradient(circle at 40% 40%, #fff, rgba(45,212,191,.35))}
+    .bubble:nth-child(2){width:160px;height:160px;right:-20px;bottom:10px;background:radial-gradient(circle at 40% 40%, #fff, rgba(14,165,233,.35))}
+    .bubble:nth-child(3){width:80px;height:80px;left:40%;top:60%;background:radial-gradient(circle at 40% 40%, #fff, rgba(59,130,246,.35))}
+    .tag{display:inline-flex;gap:10px;align-items:center;background:#fff;border:1px solid rgba(15,23,42,.06);border-radius:999px;padding:8px 14px;font-weight:600;box-shadow:0 10px 30px rgba(2,6,23,.06)}
+    .grid{display:grid;gap:20px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .card{background:var(--card);border:1px solid rgba(15,23,42,.06);border-radius:20px;padding:20px;box-shadow:0 16px 44px rgba(2,6,23,.05)}
+    .card h3{margin:0 0 8px}
+    .icon{font-size:24px}
+    .section{padding:56px 0}
+    .section h2{font-size:clamp(22px,2.4vw,36px); margin:0 0 14px}
+    .muted{color:var(--muted)}
+    .products .item{display:grid;grid-template-columns:100px 1fr;gap:18px;align-items:center}
+    .pill{background:rgba(45,212,191,.15);color:#0f766e;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;border:1px solid rgba(13,148,136,.25)}
+    .cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
+    .footer{display:grid;grid-template-columns:1fr auto;gap:18px;padding:28px 0;border-top:1px solid rgba(15,23,42,.06);color:var(--muted)}
+    .newsletter{display:flex;gap:10px}
+    input[type="email"], input[type="text"]{width:100%;padding:12px 14px;border-radius:14px;border:1px solid rgba(15,23,42,.12);outline:none}
+    .qrbox{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+    canvas.qr{background:#fff;border-radius:12px;border:1px solid rgba(15,23,42,.08)}
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .grid.cols-3{grid-template-columns:1fr}
+      .products .item{grid-template-columns:80px 1fr}
+      .qrbox{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand"><div class="logo">🧼</div> NatuAura</div>
+      <nav class="nav-links">
+        <a href="#beneficios">Benefícios</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#ingredientes">Ingredientes</a>
+        <a href="#qr">QR Code</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="tag">🌿 100% vegetal · Cruelty-free</span>
+        <h1>Sabonetes artesanais que cuidam da sua pele e do planeta.</h1>
+        <p>Feitos à mão com óleos vegetais, manteigas nutritivas e fragrâncias suaves. Ideal para todos os tipos de pele, inclusive as sensíveis.</p>
+        <div class="cta">
+          <a class="btn" href="#produtos">Ver produtos</a>
+          <a class="btn ghost" href="#qr">Gerar QR do site</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-soap">
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <svg width="200" height="80" viewBox="0 0 200 80" style="position:absolute;bottom:18px;left:18px;opacity:.9">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2dd4bf"/>
+                <stop offset="100%" stop-color="#0ea5e9"/>
+              </linearGradient>
+            </defs>
+            <text x="0" y="56" font-family="inherit" font-size="52" font-weight="800" fill="url(#g)">NatuAura</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios" class="section">
+      <h2>Benefícios que você sente no primeiro uso</h2>
+      <p class="muted">Formulações equilibradas para limpar sem agredir. Aroma leve e espumas cremosas.</p>
+      <div class="grid cols-3">
+        <div class="card"><div class="icon">🛡️</div><h3>Pele protegida</h3><p class="muted">Com vitamina E e antioxidantes naturais que ajudam a fortalecer a barreira da pele.</p></div>
+        <div class="card"><div class="icon">💧</div><h3>Hidratação real</h3><p class="muted">Óleos de coco, oliva e manteiga de karité para maciez que dura.</p></div>
+        <div class="card"><div class="icon">🌱</div><h3>Eco-consciente</h3><p class="muted">Embalagens recicláveis e produção de baixo impacto ambiental.</p></div>
+      </div>
+    </section>
+
+    <section id="produtos" class="section products">
+      <h2>Nossos sabonetes</h2>
+      <p class="muted">Escolha o seu preferido — todos são veganos e livres de parabenos.</p>
+      <div class="grid">
+        <div class="card item">
+          <div style="width:100px;height:100px;border-radius:16px;background:linear-gradient(145deg,#e6fff6,#ffffff);display:grid;place-items:center;font-size:28px">🥒</div>
+          <div>
+            <h3>Fresh Aloe</h3>
+            <p class="muted">Calmante com extrato de aloe vera. Ideal para peles sensíveis.</p>
+            <span class="pill">R$ 14,90</span>
+          </div>
+        </div>
+        <div class="card item">
+          <div style="width:100px;height:100px;border-radius:16px;background:linear-gradient(145deg,#fff5f6,#ffffff);display:grid;place-items:center;font-size:28px">🍓</div>
+          <div>
+            <h3>Berry Kiss</h3>
+            <p class="muted">Frutas vermelhas com toque adocicado. Espuma cremosa.</p>
+            <span class="pill">R$ 16,90</span>
+          </div>
+        </div>
+        <div class="card item">
+          <div style="width:100px;height:100px;border-radius:16px;background:linear-gradient(145deg,#fff9e6,#ffffff);display:grid;place-items:center;font-size:28px">🍯</div>
+          <div>
+            <h3>Honey Dream</h3>
+            <p class="muted">Com mel vegetal e aveia coloidal para nutrição intensa.</p>
+            <span class="pill">R$ 18,90</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ingredientes" class="section">
+      <h2>Ingredientes limpos</h2>
+      <p class="muted">Zero sulfatos agressivos, zero corantes pesados. Apenas o essencial para sua pele.</p>
+      <div class="grid cols-3">
+        <div class="card"><strong>Óleo de Coco</strong><p class="muted">Limpeza gentil e espuma natural.</p></div>
+        <div class="card"><strong>Manteiga de Karité</strong><p class="muted">Hidratação e maciez duradoura.</p></div>
+        <div class="card"><strong>Glicerina Vegetal</strong><p class="muted">Ajuda a reter água na pele.</p></div>
+      </div>
+    </section>
+
+    <section id="qr" class="section">
+      <h2>QR Code do seu site</h2>
+      <p class="muted">Digite o link do seu site para gerar um QR Code e usar em etiquetas, cartazes ou redes sociais.</p>
+      <div class="card qrbox">
+        <div>
+          <label for="qrUrl" class="muted">URL do site</label>
+          <input id="qrUrl" type="text" placeholder="https://seusabonete.com" value="https://sabonete-exemplo.com" />
+          <div class="cta">
+            <button class="btn" id="btnGen">Gerar QR</button>
+            <button class="btn ghost" id="btnDown" disabled>Baixar PNG</button>
+          </div>
+          <small class="muted">Dica: use um link curto e com HTTPS para leitura mais rápida.</small>
+        </div>
+        <canvas id="qrCanvas" class="qr" width="240" height="240"></canvas>
+      </div>
+    </section>
+
+    <section id="contato" class="section">
+      <h2>Fale com a gente</h2>
+      <p class="muted">Orçamentos para lembrancinhas, kits presente e atacado.</p>
+      <div class="card">
+        <form class="newsletter" onsubmit="event.preventDefault(); alert('Obrigado! Entraremos em contato por e‑mail.');">
+          <input type="email" placeholder="Seu e‑mail" required />
+          <button class="btn" type="submit">Enviar</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer">
+      <div>© <span id="year"></span> NatuAura — Sabonetes Artesanais</div>
+      <div>Instagram · WhatsApp · Loja</div>
+    </div>
+  </footer>
+
+  <script>
+    // Ano automático
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== Minimal QR generator (tiny version using QRCode.js v1.0.0 by davidshimjs, inlined) =====
+    // MIT License — https://github.com/davidshimjs/qrcodejs
+    // Minified subset for numeric/alphanumeric/url (suficiente para links comuns)
+    /*! qrcode.js start */
+    (function(o){function p(a){this.mode=s.MODE_8BIT_BYTE;this.data=a}function t(a,b){this.typeNumber=a;this.errorCorrectLevel=b;this.modules=null;this.moduleCount=0;this.dataCache=null;this.dataList=[]}var s={PAD0:236,PAD1:17,MODE_8BIT_BYTE:4,ErrorCorrectLevel:{L:1,M:0,Q:3,H:2}};function u(a){var b=1;for(;;){if(b*b>=a)return b;b++}}function v(a,b){this.buffer=[];this.length=0;this.put=function(c,d){for(var e=0;e<d;e++)this.putBit((c>>>e&1)==1)};this.putBit=function(c){this.buffer.push(c);this.length++}}var w={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54]],G15:1335,G18:7973,G15_MASK:21522};t.prototype={addData:function(a){this.dataList.push(new p(a));this.dataCache=null},isDark:function(a)
+    
